@@ -1,14 +1,13 @@
-# アコム推し 4社比較LP
+# 指定デザイン＋アコム4位追加版
 
-既存マネーローンナビのUIトーンと商品情報を参照し、独立実装した静的比較サイトです。全TOP・結果ページの順位は、回答内容にかかわらず「アコム → SMBCモビット → プロミス → アイフル」で固定しています。
+指定された`new-lp-v2-demo`の4ページをそのまま土台にし、既存3社の後ろへアコムを4位で追加した比較サイトです。独自のレイアウト変更は行わず、既存のV2カード生成・比較表・アンケート・テーマを維持しています。
 
 ## ページ
 
-- `index.html`: 経験あり／はじめての入口
-- `experienced.html`: 経験者TOP（青テーマ）
-- `beginner.html`: はじめてTOP（グリーンテーマ）
-- `experienced-result.html`: 経験者向け検索結果
-- `beginner-result.html`: はじめて向け検索結果
+- `index.html?select_modal=2&v=final2`: 経験者TOP
+- `result_v2.html?variant=experienced&v=final2`: 経験者向け検索結果
+- `mobit_beginner.html?v=final2`: はじめてTOP
+- `beginner_result_v2.html?variant=beginner&v=final2`: はじめて向け検索結果
 - `redirect.html`: 静的環境用の広告中継ページ
 - `redirect.php`: PHP環境用の広告中継
 - `operationinfo.html`: 運営者情報
