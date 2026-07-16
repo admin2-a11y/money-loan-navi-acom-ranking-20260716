@@ -26,7 +26,9 @@ python -m http.server 4173 --bind 127.0.0.1
 
 `C:\Users\sosuk\OneDrive\会社デスクトップPC\デスクトップ-DESKTOP-O4KOVSK\Codex\new-lp-v2-fixes-20260713`
 
-ロゴ、favicon、公式バナー、商品数値、商品注釈、PR表記、4商品のredirect URLを再利用しています。GTM・Meta等の計測タグ、旧ランキング、非表示カード、不要画像は移植していません。
+ロゴ、favicon、公式バナー、商品数値、商品注釈、PR表記、4商品のredirect URLを再利用しています。GTM・Meta等の計測タグ、旧ランキング、非表示カードは現在のページへ接続していません。
+
+2026-07-16の追加指示により、0713版のアセット一式（`css/`、`js/`、`images/`、`source-assets/`、`favicon.ico`）を参照用スナップショットとしてコピーしています。現在のページは引き続き`css/site.css`と`js/site.js`のみを読み込み、0713版の旧CSS・JSは未接続です。
 
 ## 公開
 

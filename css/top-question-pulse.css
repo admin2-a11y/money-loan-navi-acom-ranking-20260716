@@ -1,0 +1,154 @@
+/* Keep the first select question visually active before the modal opens. */
+.experience #searchTOP .v3-first-question-pulse,
+.beginner #searchTOP ul.survey-list > li:first-child {
+  position: relative;
+  border-radius: 8px;
+}
+
+.experience #searchTOP .v3-first-question-pulse > h3 {
+  margin: 0 0 10px !important;
+  padding: 9px 12px !important;
+  border: 2px solid #1769aa;
+  border-radius: 8px;
+  background: #eef7ff;
+  color: #123f70;
+  text-align: center;
+  box-shadow: 0 2px 0 rgba(23, 105, 170, .16);
+}
+
+body.experience #search_box #searchTOP .v3-first-question-pulse {
+  max-width: 620px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body.experience #search_box #searchTOP ul.survey-list {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+body.experience #search_box #searchTOP ul.survey-list > li::before,
+body.experience #search_box #searchTOP ul.survey-list > li.v3-answered::before {
+  content: "" !important;
+  top: 50% !important;
+  right: 11px !important;
+  width: 24px !important;
+  height: 24px !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: #4da8d2 !important;
+  transform: translateY(-50%) !important;
+}
+
+body.experience #search_box #searchTOP ul.survey-list > li::after {
+  z-index: 1;
+  right: 19px !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-color: #fff !important;
+  border-width: 0 2px 2px 0 !important;
+}
+
+.experience #searchTOP ul.survey-list > li:has(#q-speed).selected,
+html body.beginner:not(.search-results) #search_box #searchTOP ul.survey-list > li:first-child.selected:not([data-survey-visited="1"]) {
+  outline: 0 solid rgba(255, 118, 36, 0);
+  outline-offset: 0;
+  animation: v3-first-question-pulse 1.6s ease-in-out infinite !important;
+  will-change: outline, filter;
+}
+
+@keyframes v3-first-question-pulse {
+  0%, 100% {
+    outline-width: 0;
+    outline-color: rgba(255, 118, 36, 0);
+    filter: drop-shadow(0 0 0 rgba(255, 118, 36, 0));
+  }
+
+  50% {
+    outline-width: 4px;
+    outline-color: rgba(255, 118, 36, 0.42);
+    outline-offset: 1px;
+    filter: drop-shadow(0 0 8px rgba(255, 118, 36, 0.48));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience #searchTOP ul.survey-list > li:has(#q-speed).selected,
+  html body.beginner:not(.search-results) #search_box #searchTOP ul.survey-list > li:first-child.selected:not([data-survey-visited="1"]) {
+    outline: 3px solid rgba(255, 118, 36, 0.28);
+    animation: none !important;
+    filter: none;
+  }
+}
+
+/* Short, shared feedback before the TOP survey navigates to its result page. */
+.loan-search-loading[hidden] {
+  display: none !important;
+}
+
+.loan-search-loading {
+  position: fixed;
+  z-index: 10020;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(3px);
+}
+
+.loan-search-loading__panel {
+  --search-loading-accent: #1769aa;
+  width: min(100%, 360px);
+  padding: 30px 20px 27px;
+  border: 1px solid color-mix(in srgb, var(--search-loading-accent) 28%, white);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 14px 42px rgba(21, 48, 72, .18);
+  color: #17334b;
+  text-align: center;
+}
+
+body.beginner .loan-search-loading__panel {
+  --search-loading-accent: #2f966f;
+  color: #17483a;
+}
+
+.loan-search-loading__spinner {
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 17px;
+  border: 5px solid color-mix(in srgb, var(--search-loading-accent) 18%, white);
+  border-top-color: var(--search-loading-accent);
+  border-radius: 50%;
+  animation: loan-search-loading-spin .75s linear infinite;
+}
+
+.loan-search-loading__panel strong,
+.loan-search-loading__panel > span:last-child {
+  display: block;
+}
+
+.loan-search-loading__panel strong {
+  color: var(--search-loading-accent);
+  font-size: clamp(17px, 4.8vw, 21px);
+  line-height: 1.45;
+}
+
+.loan-search-loading__panel > span:last-child {
+  margin-top: 7px;
+  color: #596873;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@keyframes loan-search-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loan-search-loading__spinner {
+    animation: none;
+  }
+}
