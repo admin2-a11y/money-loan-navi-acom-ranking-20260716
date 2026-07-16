@@ -135,6 +135,10 @@ body.beginner .loan-search-loading__panel {
   line-height: 1.45;
 }
 
+.loan-search-loading__panel strong > span {
+  display: block;
+}
+
 .loan-search-loading__panel > span:last-child {
   margin-top: 7px;
   color: #596873;

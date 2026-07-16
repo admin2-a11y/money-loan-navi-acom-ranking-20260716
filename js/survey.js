@@ -375,7 +375,7 @@
     overlay.innerHTML = [
       '<div class="loan-search-loading__panel">',
       '  <span class="loan-search-loading__spinner" aria-hidden="true"></span>',
-      '  <strong>あなたに合ったカードローンを検索中…</strong>',
+      '  <strong><span>あなたに合ったカードローンを</span><span>検索中…</span></strong>',
       '  <span>ご希望の条件を照らし合わせています</span>',
       '</div>'
     ].join("");

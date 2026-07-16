@@ -298,6 +298,7 @@ body.beginner.result-v2 .v4-recommend-intro h2 { color: #102a43 !important; }
 .v4-lender-card:nth-child(2) .v4-crown { color: #aab3bc; }
 .v4-lender-card:nth-child(3) .v4-crown { color: #b87333; }
 .v4-lender-card:nth-child(n+4) .v4-crown { color: #8b949c; }
+.v4-lender-card:nth-child(4) .v4-crown { font-family: inherit; font-size: 21px; font-weight: 900; }
 
 .v4-lender-name {
   margin: 0;

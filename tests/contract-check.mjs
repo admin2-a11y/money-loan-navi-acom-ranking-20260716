@@ -13,6 +13,9 @@ const cardsJs = fs.readFileSync(path.join(root, "js/result-cards-v2.js"), "utf8"
 if (!cardsJs.includes('["mobit", "aiful", "promise", "acom"]')) {
   throw new Error("V2 lender order is not Mobit, Aiful, Promise, Acom");
 }
+if (!cardsJs.includes('const rankMarks = ["♛", "♛", "♛", "④"]')) {
+  throw new Error("Acom does not use the No.4 rank mark");
+}
 for (const text of [
   'catch: "はじめてなら30日間金利0円"',
   '["融資時間", "最短20分"]',
@@ -47,5 +50,11 @@ const redirect = fs.readFileSync(path.join(root, "redirect.html"), "utf8");
 for (const sensitive of ["income", "job", "amount", "current_loans", "company_size", "duration", "priority"]) {
   if (new RegExp(`allowed[^;]*${sensitive}`).test(redirect)) throw new Error(`sensitive redirect key: ${sensitive}`);
 }
+
+const compareCss = fs.readFileSync(path.join(root, "css/mobit-compare2.css"), "utf8");
+if (!compareCss.includes("width: calc(86% / 4);")) throw new Error("Mobit outline is not aligned to four columns");
+if (!compareCss.includes("width: calc((100% - 50px) / 4);")) throw new Error("Mobile Mobit outline is not aligned to four columns");
+const surveyJs = fs.readFileSync(path.join(root, "js/survey.js"), "utf8");
+if (!surveyJs.includes("あなたに合ったカードローンを</span><span>検索中…")) throw new Error("Search loading line break is missing");
 
 console.log("contract ok: 4 source-based pages, Acom fixed at No.4, two 4-company tables");
