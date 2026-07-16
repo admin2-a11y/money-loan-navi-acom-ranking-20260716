@@ -49,7 +49,7 @@
     : ["mobit", "aiful", "promise", "acom"];
   const lendersByKey = new Map(lenders.map((lender) => [lender.key, lender]));
   const rankedLenders = variantOrder.map((key) => lendersByKey.get(key)).filter(Boolean);
-  const rankMarks = ["♛", "♛", "♛", "④"];
+  const rankMarks = ["♛", "♛", "♛", "4"];
 
   const ringSpecLabels = new Set(["融資時間", "実質年率", "利用限度額", "無利息期間", "事前審査", "事前診断", "利用方法"]);
   const specMarkup = (specs) => specs.map(([label, value]) => {
@@ -86,7 +86,7 @@
         ${rankedLenders.map((lender, index) => `
           <article class="v4-lender-card" data-v4-lender="${lender.key}">
             <div class="v4-lender-titlebar">
-              <h3 class="v4-lender-name"><span class="v4-crown" aria-hidden="true">${rankMarks[index] || index + 1}</span> <a href="${redirectPage}?item=${lender.key}" target="_blank" rel="sponsored noopener">${lender.name}</a></h3>
+              <h3 class="v4-lender-name"><span class="v4-crown${index === 3 ? " is-fourth-medal" : ""}" aria-hidden="true">${rankMarks[index] || index + 1}</span> <a href="${redirectPage}?item=${lender.key}" target="_blank" rel="sponsored noopener">${lender.name}</a></h3>
               <p class="v4-lender-rank">おすすめ順 No.${index + 1}</p>
             </div>
             <p class="v4-lender-catch">${lender.catch}</p>

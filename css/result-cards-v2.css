@@ -298,7 +298,41 @@ body.beginner.result-v2 .v4-recommend-intro h2 { color: #102a43 !important; }
 .v4-lender-card:nth-child(2) .v4-crown { color: #aab3bc; }
 .v4-lender-card:nth-child(3) .v4-crown { color: #b87333; }
 .v4-lender-card:nth-child(n+4) .v4-crown { color: #8b949c; }
-.v4-lender-card:nth-child(4) .v4-crown { font-family: inherit; font-size: 21px; font-weight: 900; }
+.v4-lender-card:nth-child(4) .v4-crown.is-fourth-medal {
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  width: 27px;
+  height: 27px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2px;
+  border: 2px solid #dbe3e9;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #8194a7 0%, #506579 100%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5), 0 2px 3px rgba(35, 56, 74, .24);
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  vertical-align: -5px;
+}
+
+.v4-lender-card:nth-child(4) .v4-crown.is-fourth-medal::before,
+.v4-lender-card:nth-child(4) .v4-crown.is-fourth-medal::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -7px;
+  width: 8px;
+  height: 11px;
+  background: #60778d;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 50% 72%, 18% 100%);
+}
+
+.v4-lender-card:nth-child(4) .v4-crown.is-fourth-medal::before { left: 4px; transform: rotate(8deg); }
+.v4-lender-card:nth-child(4) .v4-crown.is-fourth-medal::after { right: 4px; transform: rotate(-8deg); }
 
 .v4-lender-name {
   margin: 0;
