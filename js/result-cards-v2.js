@@ -45,8 +45,8 @@
     : "experienced";
   const isTopContext = mount.dataset.v4Context === "top";
   const variantOrder = resultVariant === "beginner"
-    ? ["mobit", "aiful", "promise", "acom"]
-    : ["mobit", "aiful", "promise", "acom"];
+    ? ["acom", "promise", "mobit", "aiful"]
+    : ["acom", "promise", "mobit", "aiful"];
   const lendersByKey = new Map(lenders.map((lender) => [lender.key, lender]));
   const rankedLenders = variantOrder.map((key) => lendersByKey.get(key)).filter(Boolean);
   const rankMarks = ["♛", "♛", "♛", "4"];
@@ -77,7 +77,7 @@
           <h2><span>即日で借りたいなら</span><span>このカードローン</span></h2>
           <p>すぐにお金が必要だけど家族や会社にバレたくないし<br>できればおトクに借りたい…！<br>そんなあなたにこちらのカードローンがおすすめです！</p>
         </div>
-        <div data-v4-final-mobit></div>
+        <div data-v4-final-acom></div>
       </section>`;
 
   mount.innerHTML = `
@@ -132,20 +132,20 @@
     </section>`;
 
   const lenderList = mount.querySelector(".v4-lender-list");
-  const finalMobitMount = mount.querySelector("[data-v4-final-mobit]");
-  const primaryMobitCard = lenderList?.querySelector('[data-v4-lender="mobit"]');
-  if (finalMobitMount && primaryMobitCard) {
-    const finalMobitCard = primaryMobitCard.cloneNode(true);
-    finalMobitCard.classList.add("v4-lender-card-final");
-    finalMobitCard.querySelector(".v4-lender-rank").textContent = "当サイトおすすめ";
-    finalMobitMount.appendChild(finalMobitCard);
+  const finalAcomMount = mount.querySelector("[data-v4-final-acom]");
+  const primaryAcomCard = lenderList?.querySelector('[data-v4-lender="acom"]');
+  if (finalAcomMount && primaryAcomCard) {
+    const finalAcomCard = primaryAcomCard.cloneNode(true);
+    finalAcomCard.classList.add("v4-lender-card-final");
+    finalAcomCard.querySelector(".v4-lender-rank").textContent = "当サイトおすすめ";
+    finalAcomMount.appendChild(finalAcomCard);
   }
-  if (primaryMobitCard) {
-    document.querySelectorAll("[data-v4-top-final-mobit]").forEach((target) => {
-      const repeatedMobitCard = primaryMobitCard.cloneNode(true);
-      repeatedMobitCard.classList.add("v4-lender-card-final");
-      repeatedMobitCard.querySelector(".v4-lender-rank").textContent = "当サイトおすすめ";
-      target.appendChild(repeatedMobitCard);
+  if (primaryAcomCard) {
+    document.querySelectorAll("[data-v4-top-final-acom]").forEach((target) => {
+      const repeatedAcomCard = primaryAcomCard.cloneNode(true);
+      repeatedAcomCard.classList.add("v4-lender-card-final");
+      repeatedAcomCard.querySelector(".v4-lender-rank").textContent = "当サイトおすすめ";
+      target.appendChild(repeatedAcomCard);
     });
   }
   const pad = (value) => String(value).padStart(2, "0");

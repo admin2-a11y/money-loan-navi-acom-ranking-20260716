@@ -156,3 +156,16 @@ body.beginner .loan-search-loading__panel {
     animation: none;
   }
 }
+
+/* Keep the active experienced TOP countdown inside narrow mobile viewports. */
+@media screen and (max-width: 414px) {
+  body.experience:not(.search-results) #search_box .top-deadline-box #timerTop > .timerTopParts {
+    flex-wrap: wrap !important;
+  }
+
+  body.experience:not(.search-results) #search_box .top-deadline-box #timerTop .timerTopLead {
+    flex-basis: 100%;
+    margin: 0 0 2px !important;
+    text-align: center;
+  }
+}
