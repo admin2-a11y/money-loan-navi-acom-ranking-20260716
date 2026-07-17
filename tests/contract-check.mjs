@@ -29,7 +29,7 @@ for (const text of [
   'reviewProfile: "職業：会社員<br>年齢：25歳"',
   'reviewAmount: "100万～300万円未満"',
   'reviewTime: "1時間以内"',
-  'cta: "はじめての方はこちらから申し込む"'
+  'cta: "30日間金利0円で申し込む"'
 ]) {
   if (!cardsJs.includes(text)) throw new Error(`Missing Acom content: ${text}`);
 }
@@ -58,6 +58,9 @@ for (const sensitive of ["income", "job", "amount", "current_loans", "company_si
 }
 
 const compareCss = fs.readFileSync(path.join(root, "css/mobit-compare2.css"), "utf8");
+if (compareCss.includes("#fff4f1") || compareCss.includes("#fff0f2")) throw new Error("Pink comparison header backgrounds remain");
+if (!compareCss.includes(".v3-compare2-table thead tr:last-child th") || !compareCss.includes("border-bottom: 2px solid #c7cdd2 !important;")) throw new Error("Comparison header divider is missing");
+if (!compareCss.includes(".v3-compare2-table thead .v3-compare2-product:not(.is-featured)") || !compareCss.includes("background: #fff;")) throw new Error("Non-featured comparison headers are not white");
 if (!compareCss.includes("width: calc((86% / 4) + 8px);")) throw new Error("Mobit outline does not preserve the desktop column width");
 if (!compareCss.includes("width: calc(((100% - 50px) / 4) + 8px);")) throw new Error("Mobit outline does not preserve the mobile column width");
 const surveyJs = fs.readFileSync(path.join(root, "js/survey.js"), "utf8");

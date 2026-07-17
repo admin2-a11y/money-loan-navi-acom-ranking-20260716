@@ -336,12 +336,12 @@
   color: #523300;
 }
 
-.v3-compare2-table thead .v3-compare2-product:nth-child(3) {
-  background: #fff4f1;
+.v3-compare2-table thead tr:last-child th {
+  border-bottom: 2px solid #c7cdd2 !important;
 }
 
-.v3-compare2-table thead .v3-compare2-product:nth-child(4) {
-  background: #fff0f2;
+.v3-compare2-table thead .v3-compare2-product:not(.is-featured) {
+  background: #fff;
 }
 
 .v3-compare2-table tbody tr:nth-child(even) td:not(.is-featured) {
