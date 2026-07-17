@@ -14,11 +14,11 @@
     },
     {
       key: "acom", name: "アコム", group: "三菱UFJフィナンシャル・グループ", banner: "banner_acom2.jpg", width: 300, height: 250,
-      catch: "はじめてなら30日間金利0円", cta: "30日間金利0円で申し込む",
-      specs: [["融資時間", "最短20分"], ["実質年率", "2.4％～17.9％"], ["利用限度額", "最大800万円"], ["無利息期間", "契約日の翌日から30日間"], ["利用方法", "振込・コンビニATM"]],
-      points: [["はじめてなら金利0円期間あり！", "アコムを初めて利用する人は30日間金利0円！"], ["審査結果が最短20分でわかる！", "21時までに申し込めば当日中に口座に振込！土日祝も24時間申込可能"], ["周りにバレずに借りられる！", "面倒な電話連絡や郵送物はないから誰にもバレなくて安心！"], ["三菱UFJフィナンシャル・グループで安心！", "知名度やグループ会社による安心感があります。"]],
+      catch: "はじめてなら30日間金利0円", catchRef: "※3", cta: "30日間金利0円で申し込む", ctaRef: "※3", bannerRef: "※1",
+      specs: [["融資時間", "最短20分", "※1"], ["実質年率", "2.4％～17.9％"], ["利用限度額", "最大800万円"], ["無利息期間", "契約日の翌日から30日間", "※3"], ["利用方法", "振込・コンビニATM"]],
+      points: [["はじめてなら金利0円期間あり！", "アコムを初めて利用する人は30日間金利0円！", "※3", "※3"], ["審査結果が最短20分でわかる！", "21時までに申し込めば当日中に口座に振込！土日祝も24時間申込可能", "※1", "※2"], ["周りにバレずに借りられる！", "面倒な電話連絡や郵送物はないから誰にもバレなくて安心！"], ["三菱UFJフィナンシャル・グループで安心！", "知名度やグループ会社による安心感があります。"]],
       reviewProfile: "職業：会社員<br>年齢：25歳", reviewIncome: "", reviewRating: 5, reviewAmount: "100万～300万円未満", reviewTime: "1時間以内", review: "金利0円期間に魅力を感じ申し込みました。カードローンは初めてでしたが審査もスムーズでした。スマホで完結できるので電話連絡や郵送物もなく周りにバレずに借入でき本当に助かりました。", reviewImage: "review-acom-v2.png", reviewImageWidth: 213, reviewImageHeight: 196, reviewPosition: "acom", reviewImageAlt: "口コミ利用者",
-      note: "※アコムを初めて契約する方が無利息期間の対象です。※お申込時間や審査状況によりご希望に添えない場合があります。※サービス内容は公式サイトで最新情報をご確認ください。※一例であり、結果を保証するものではありません。"
+      note: "※1 お申込時間や審査によりご希望に添えない場合がございます。<br>※2 金融機関・お申込時間帯によってはご利用いただけない場合がございます。<br>※3 アコムでのご契約がはじめてのお客さま<br>※サービス内容は公式サイトで最新情報をご確認ください。※一例であり、結果を保証するものではありません。"
     },
     {
       key: "promise", name: "プロミス", group: "SMBCコンシューマーファイナンス株式会社", banner: "banner_promise.jpg", width: 300, height: 250,
@@ -52,11 +52,12 @@
   const rankMarks = ["♛", "♛", "♛", "4"];
 
   const ringSpecLabels = new Set(["融資時間", "実質年率", "利用限度額", "無利息期間", "事前審査", "事前診断", "利用方法"]);
-  const specMarkup = (specs) => specs.map(([label, value]) => {
+  const noteRefMarkup = (reference) => reference ? `<sup class="v4-note-ref">${reference}</sup>` : "";
+  const specMarkup = (specs) => specs.map(([label, value, reference]) => {
     const ringClass = ringSpecLabels.has(label) ? " class=\"v4-spec-ring\"" : "";
-    return `<div${ringClass}><dt>${label}</dt><dd>${value}</dd></div>`;
+    return `<div${ringClass}><dt>${label}</dt><dd>${value}${noteRefMarkup(reference)}</dd></div>`;
   }).join("");
-  const pointMarkup = (points) => points.map(([title, body]) => `<li><strong>${title}</strong><span>${body}</span></li>`).join("");
+  const pointMarkup = (points) => points.map(([title, body, titleRef, bodyRef]) => `<li><strong>${title}${noteRefMarkup(titleRef)}</strong><span>${body}${noteRefMarkup(bodyRef)}</span></li>`).join("");
   const reviewProfileMarkup = (lender) => {
     const income = lender.reviewIncome ? `<span class="v4-review-income">年収：${lender.reviewIncome}</span>` : "";
     const rating = lender.reviewRating ? `<span class="v4-review-rating" aria-label="評価5点満点中${lender.reviewRating}点"><span aria-hidden="true">★★★★★</span><b>${lender.reviewRating}</b></span>` : "";
@@ -89,10 +90,11 @@
               <h3 class="v4-lender-name"><span class="v4-crown${index === 3 ? " is-fourth-medal" : ""}" aria-hidden="true">${rankMarks[index] || index + 1}</span> <a href="${redirectPage}?item=${lender.key}" target="_blank" rel="sponsored noopener">${lender.name}</a></h3>
               <p class="v4-lender-rank">おすすめ順 No.${index + 1}</p>
             </div>
-            <p class="v4-lender-catch">${lender.catch}</p>
+            <p class="v4-lender-catch">${lender.catch}${noteRefMarkup(lender.catchRef)}</p>
             <div class="v4-lender-head">
               <a class="v4-lender-banner" href="${redirectPage}?item=${lender.key}" target="_blank" rel="sponsored noopener">
                 <img src="./images/${lender.banner}" width="${lender.width}" height="${lender.height}" alt="${lender.name}公式サイトへ" loading="lazy">
+                ${lender.bannerRef ? `<small class="v4-banner-ref">${lender.bannerRef}</small>` : ""}
               </a>
               <div class="v4-lender-summary">
                 <dl class="v4-specs">${specMarkup(lender.specs)}<div class="v4-conveni"><dt>利用コンビニ</dt><dd><span class="v4-conveni-logo-crop"><img src="./images/convenience-store-logos-360.webp" width="360" height="87" alt="利用可能な提携コンビニATM：セブン-イレブン、ファミリーマート、ローソン、ミニストップ" loading="lazy" decoding="async"></span></dd></div></dl>
@@ -122,7 +124,7 @@
             </section>
             <div class="v4-cta-wrap">
               <div class="v4-countdown" data-v4-countdown aria-live="polite"><span>本日中に借りるなら</span><b>残り <i data-v4-hours>00</i>時間<i data-v4-minutes>00</i>分<i data-v4-seconds>00</i>秒<i data-v4-centiseconds>00</i></b></div>
-              <span class="v4-cta-bubble">${lender.cta}</span>
+              <span class="v4-cta-bubble">${lender.cta}${noteRefMarkup(lender.ctaRef)}</span>
               <a class="v4-cta" href="${redirectPage}?item=${lender.key}" target="_blank" rel="sponsored noopener">詳しくはこちら</a>
             </div>
             <p class="v4-lender-note">【PR】Sponsored by ${lender.group}<br>${lender.note}</p>

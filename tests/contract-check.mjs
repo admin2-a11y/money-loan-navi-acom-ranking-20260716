@@ -9,6 +9,7 @@ const canonicalPages = [
   "beginner_result_v2.html"
 ];
 const cardsJs = fs.readFileSync(path.join(root, "js/result-cards-v2.js"), "utf8");
+const acomBlock = cardsJs.match(/key: "acom"[\s\S]*?key: "promise"/)?.[0] || "";
 
 if (!cardsJs.includes('["acom", "promise", "mobit", "aiful"]')) {
   throw new Error("V2 lender order is not Acom, Promise, Mobit, Aiful");
@@ -21,18 +22,26 @@ if (!cardsJs.includes('[data-v4-lender="acom"]') || !cardsJs.includes("data-v4-f
 }
 for (const text of [
   'catch: "はじめてなら30日間金利0円"',
-  '["融資時間", "最短20分"]',
   '["実質年率", "2.4％～17.9％"]',
   '["利用限度額", "最大800万円"]',
-  '["無利息期間", "契約日の翌日から30日間"]',
   '["利用方法", "振込・コンビニATM"]',
   'reviewProfile: "職業：会社員<br>年齢：25歳"',
   'reviewAmount: "100万～300万円未満"',
   'reviewTime: "1時間以内"',
-  'cta: "30日間金利0円で申し込む"'
+  'cta: "30日間金利0円で申し込む", ctaRef: "※3", bannerRef: "※1"',
+  '["融資時間", "最短20分", "※1"]',
+  '["無利息期間", "契約日の翌日から30日間", "※3"]',
+  '["審査結果が最短20分でわかる！", "21時までに申し込めば当日中に口座に振込！土日祝も24時間申込可能", "※1", "※2"]',
+  '※1 お申込時間や審査によりご希望に添えない場合がございます。',
+  '※2 金融機関・お申込時間帯によってはご利用いただけない場合がございます。',
+  '※3 アコムでのご契約がはじめてのお客さま'
 ]) {
   if (!cardsJs.includes(text)) throw new Error(`Missing Acom content: ${text}`);
 }
+for (const forbidden of ["アコムを初めて契約する方が無利息期間の対象です。", "審査状況"] ) {
+  if (acomBlock.includes(forbidden)) throw new Error(`Deprecated Acom note remains: ${forbidden}`);
+}
+if (!cardsJs.includes("※一例であり、結果を保証するものではありません。")) throw new Error("Existing review disclaimer changed");
 
 for (const page of canonicalPages) {
   const html = fs.readFileSync(path.join(root, page), "utf8");

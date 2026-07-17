@@ -280,6 +280,25 @@ body.beginner.result-v2 .v4-recommend-intro h2 { color: #102a43 !important; }
   border-radius: 4px;
 }
 
+.v4-banner-ref {
+  display: block;
+  margin-top: 2px;
+  color: #666;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.v4-note-ref {
+  display: inline;
+  margin-left: 2px;
+  font-size: .7em;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: super;
+}
+
 .v4-lender-rank {
   display: inline-flex;
   align-items: center;
