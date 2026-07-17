@@ -10,11 +10,14 @@ const canonicalPages = [
 ];
 const cardsJs = fs.readFileSync(path.join(root, "js/result-cards-v2.js"), "utf8");
 
-if (!cardsJs.includes('["mobit", "aiful", "promise", "acom"]')) {
-  throw new Error("V2 lender order is not Mobit, Aiful, Promise, Acom");
+if (!cardsJs.includes('["acom", "promise", "mobit", "aiful"]')) {
+  throw new Error("V2 lender order is not Acom, Promise, Mobit, Aiful");
 }
 if (!cardsJs.includes('const rankMarks = ["♛", "♛", "♛", "4"]') || !cardsJs.includes('is-fourth-medal')) {
-  throw new Error("Acom does not use the No.4 medal illustration");
+  throw new Error("The No.4 lender does not use the medal illustration");
+}
+if (!cardsJs.includes('[data-v4-lender="acom"]') || !cardsJs.includes("data-v4-final-acom")) {
+  throw new Error("Acom is not configured as the final recommendation");
 }
 for (const text of [
   'catch: "はじめてなら30日間金利0円"',
@@ -42,7 +45,10 @@ for (const page of ["index.html", "mobit_beginner.html"]) {
   const table = html.match(/<table class="v3-compare2-table">[\s\S]*?<\/table>/)?.[0] || "";
   const headers = [...table.matchAll(/class="v3-compare2-product[^\"]*"/g)];
   if (headers.length !== 4) throw new Error(`${page}: expected four comparison products`);
-  if (!table.includes("SMBCモビット、アイフル、プロミス、アコムの比較表")) throw new Error(`${page}: bad comparison caption`);
+  if (!table.includes("アコム、プロミス、SMBCモビット、アイフルの比較表")) throw new Error(`${page}: bad comparison caption`);
+  const companyOrder = [...table.matchAll(/<b>(アコム|プロミス|SMBCモビット|アイフル)<\/b>/g)].map((match) => match[1]);
+  if (companyOrder.join(",") !== "アコム,プロミス,SMBCモビット,アイフル") throw new Error(`${page}: bad comparison order`);
+  if (!table.match(/v3-compare2-product is-featured[\s\S]*?<b>アコム<\/b>/)) throw new Error(`${page}: Acom is not featured`);
   if (!table.includes("redirect.php?item=acom")) throw new Error(`${page}: missing Acom table CTA`);
 }
 
@@ -57,4 +63,4 @@ if (!compareCss.includes("width: calc(((100% - 50px) / 4) + 8px);")) throw new E
 const surveyJs = fs.readFileSync(path.join(root, "js/survey.js"), "utf8");
 if (!surveyJs.includes("あなたに合ったカードローンを</span><span>検索中…")) throw new Error("Search loading line break is missing");
 
-console.log("contract ok: 4 source-based pages, Acom fixed at No.4, two 4-company tables");
+console.log("contract ok: four pages rank Acom, Promise, Mobit, Aiful with Acom recommended");
