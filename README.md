@@ -11,11 +11,10 @@
 - `redirect.html`: 静的環境用の広告中継ページ
 - `redirect.php`: PHP環境用の広告中継
 - `operationinfo.html`: 運営者情報
-- `demo-list.html`: 確認用ページ一覧
 
 ## ローカル確認
 
-プロジェクトルートで次を実行し、`http://127.0.0.1:4173/demo-list.html`を開きます。
+プロジェクトルートで次を実行し、`http://127.0.0.1:4173/index.html?select_modal=2&v=final2`を開きます。
 
 ```powershell
 python -m http.server 4173 --bind 127.0.0.1
